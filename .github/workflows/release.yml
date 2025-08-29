@@ -118,7 +118,7 @@ jobs:
           echo "Creating GitHub release..."
           gh release create "${{ github.ref_name }}" \
             --title "Farmer v${VERSION}" \
-            --notes "$(cat <<'EOF'
+            --notes "$(cat <<EOF
 ## Farmer v${VERSION}
 
 ### Installation
