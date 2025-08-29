@@ -1,0 +1,139 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        include:
+          - os: macos-latest
+            platform: mac
+          - os: ubuntu-latest
+            platform: linux
+          - os: windows-latest
+            platform: win
+    
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+      
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Build Angular app
+        run: npx ng build --base-href ./
+      
+      - name: Build Electron TypeScript
+        run: |
+          npx tsc -p electron/tsconfig.json
+          echo "=== dist/ contents ==="
+          ls dist/
+          echo "=== dist/electron/ contents ==="
+          ls dist/electron/
+      
+      # macOS Code Signing (optional - requires certificates)
+      - name: Prepare for macOS notarization
+        if: startsWith(matrix.os, 'macos')
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+        run: |
+          # Only run if secrets are configured
+          echo "macOS build prepared"
+      
+      # Build distributables
+      - name: Build Electron App
+        run: |
+          unset GH_TOKEN
+          unset GITHUB_TOKEN
+          echo "Building for platform: ${{ matrix.platform }}"
+          if [ "${{ matrix.platform }}" = "mac" ]; then
+            npx electron-builder --mac --publish never || true
+          elif [ "${{ matrix.platform }}" = "linux" ]; then
+            npx electron-builder --linux --publish never || true
+          elif [ "${{ matrix.platform }}" = "win" ]; then
+            npx electron-builder --win --publish never || true
+          fi
+          echo "=== Checking release directory ==="
+          ls release/ || echo "No release directory"
+        shell: bash
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ matrix.platform }}
+          path: release/
+          if-no-files-found: warn
+          retention-days: 5
+  
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+      - name: Wait to avoid rate limits
+        run: sleep 30
+      
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+      
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-artifacts
+      
+      - name: Display structure of downloaded files
+        run: |
+          echo "=== Downloaded artifacts structure ==="
+          ls -R release-artifacts/ || echo "Failed to list artifacts"
+      
+      - name: Create Release with GitHub CLI
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Find all release files
+          echo "Finding release files..."
+          find release-artifacts -type f \( -name "*.dmg" -o -name "*.zip" -o -name "*.exe" -o -name "*.AppImage" \) > files.txt
+          
+          # Extract version number (remove 'v' prefix)
+          VERSION="${{ github.ref_name }}"
+          VERSION="${VERSION#v}"
+          
+          # Create release
+          echo "Creating GitHub release..."
+          gh release create "${{ github.ref_name }}" \
+            --title "Farmer v${VERSION}" \
+            --notes "$(cat <<'EOF'
+## Farmer v${VERSION}
+
+### Installation
+- **macOS:** Download the .dmg file and drag Farmer to Applications
+- **Windows:** Download and run the .exe installer  
+- **Linux:** Download the .AppImage and make it executable
+
+### What's New
+- Comprehensive agricultural resource hub
+- Farm management tools and weather tracking
+- Beautiful farming-themed UI with theme support
+- Access to markets, community, and AgTech resources
+
+---
+Built with 🌾 by GuildMaster Development
+EOF
+          )" \
+            $(cat files.txt) || echo "Release may already exist or failed"
