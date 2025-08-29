@@ -1,0 +1,16 @@
+<div class="theme-switcher">
+  <button class="theme-button" (click)="toggleMenu()">
+    <span class="theme-icon">{{ getCurrentThemeIcon() }}</span>
+  </button>
+  
+  <div class="theme-menu" *ngIf="isOpen">
+    <button 
+      *ngFor="let theme of themes"
+      class="theme-option"
+      [class.active]="currentTheme === theme.id"
+      (click)="setTheme(theme.id)">
+      <span class="option-icon">{{ theme.icon }}</span>
+      <span class="option-name">{{ theme.name }}</span>
+    </button>
+  </div>
+</div>

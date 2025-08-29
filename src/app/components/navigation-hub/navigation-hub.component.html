@@ -1,0 +1,38 @@
+<section class="navigation-hub" [@cardAnimation]="categories.length">
+  <div class="hub-grid">
+    <div 
+      *ngFor="let category of categories" 
+      class="category-card"
+      [class.expanded]="selectedCategory === category"
+      [style.background]="'linear-gradient(135deg, ' + category.color + '22, ' + category.color + '11)'"
+      [style.border-color]="category.color + '44'"
+      (click)="selectCategory(category)">
+      
+      <div class="card-header">
+        <span class="card-icon">{{ category.icon }}</span>
+        <h3 class="card-title">{{ category.title }}</h3>
+      </div>
+      
+      <p class="card-description">{{ category.description }}</p>
+      
+      <div class="resource-list" *ngIf="selectedCategory === category" (click)="$event.stopPropagation()">
+        <a 
+          *ngFor="let resource of category.resources" 
+          class="resource-item"
+          [href]="resource.url"
+          target="_blank"
+          (click)="openResource(resource.url, $event)">
+          <span class="resource-name">{{ resource.name }}</span>
+          <span class="resource-description">{{ resource.description }}</span>
+        </a>
+      </div>
+      
+      <div class="card-footer">
+        <span class="resource-count">{{ category.resources.length }} resources</span>
+        <svg class="expand-icon" [class.rotated]="selectedCategory === category" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>

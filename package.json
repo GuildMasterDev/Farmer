@@ -1,0 +1,129 @@
+{
+  "name": "farmer",
+  "productName": "Farmer",
+  "version": "1.0.0",
+  "description": "A comprehensive resource hub for farming and agriculture",
+  "author": {
+    "name": "GuildMaster Development",
+    "email": "contact@guildmasterdev.com"
+  },
+  "main": "dist/electron/main.js",
+  "scripts": {
+    "ng": "ng",
+    "start": "run-p electron:serve ng:serve",
+    "build": "npm run ng:build && npm run electron:build",
+    "ng:serve": "ng serve --port 4300",
+    "ng:build": "ng build --base-href ./",
+    "electron:serve": "wait-on http://localhost:4300 && npm run electron:run",
+    "electron:run": "electron . --serve",
+    "electron:build": "tsc -p electron/tsconfig.json",
+    "electron:dist": "npm run build && electron-builder",
+    "test": "ng test",
+    "lint": "ng lint"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^17.3.0",
+    "@angular/common": "^17.3.0",
+    "@angular/compiler": "^17.3.0",
+    "@angular/core": "^17.3.0",
+    "@angular/forms": "^17.3.0",
+    "@angular/platform-browser": "^17.3.0",
+    "@angular/platform-browser-dynamic": "^17.3.0",
+    "@angular/router": "^17.3.0",
+    "rxjs": "^7.8.1",
+    "tslib": "^2.6.2",
+    "zone.js": "^0.14.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^17.3.0",
+    "@angular/cli": "^17.3.0",
+    "@angular/compiler-cli": "^17.3.0",
+    "@types/node": "^20.11.30",
+    "electron": "^29.1.0",
+    "electron-builder": "^24.13.3",
+    "electron-reload": "^2.0.0-alpha.1",
+    "npm-run-all2": "^6.1.2",
+    "typescript": "^5.4.2",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.guildmasterdev.farmer",
+    "productName": "Farmer",
+    "copyright": "Copyright © 2024 GuildMaster Development",
+    "directories": {
+      "output": "release/",
+      "buildResources": "resources"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.education",
+      "icon": "resources/icon.icns",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "entitlementsInherit": "resources/entitlements.mac.plist",
+      "extendInfo": {
+        "NSAppleEventsUsageDescription": "Please allow Farmer to open external links.",
+        "NSCameraUsageDescription": "This app does not use the camera.",
+        "NSMicrophoneUsageDescription": "This app does not use the microphone."
+      },
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        },
+        {
+          "target": "zip",
+          "arch": ["x64", "arm64"]
+        }
+      ]
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "artifactName": "${productName}-${version}-${os}.${ext}"
+    },
+    "win": {
+      "icon": "resources/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64", "ia32"]
+        }
+      ],
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": true,
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "linux": {
+      "icon": "resources/icons",
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": ["x64"]
+        }
+      ],
+      "category": "Education",
+      "maintainer": "GuildMaster Development",
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    }
+  }
+}

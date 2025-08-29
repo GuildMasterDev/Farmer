@@ -1,0 +1,16 @@
+<div class="quick-actions" [class.expanded]="isExpanded">
+  <button class="fab-trigger" (click)="toggleExpanded()">
+    <span class="fab-icon">{{ isExpanded ? '✕' : '⚡' }}</span>
+  </button>
+  
+  <div class="action-buttons" *ngIf="isExpanded">
+    <button 
+      *ngFor="let action of actions"
+      class="action-button"
+      [title]="action.tooltip"
+      (click)="executeAction(action)">
+      <span class="action-icon">{{ action.icon }}</span>
+      <span class="action-tooltip">{{ action.tooltip }}</span>
+    </button>
+  </div>
+</div>

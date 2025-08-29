@@ -1,0 +1,83 @@
+.theme-switcher {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 1000;
+}
+
+.theme-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  border: 2px solid var(--color-accent);
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+  &:hover {
+    transform: scale(1.1) rotate(20deg);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  }
+}
+
+.theme-menu {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 0.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  animation: slideDown 0.3s ease;
+  min-width: 150px;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+
+  &:hover {
+    background: rgba(0,0,0,0.05);
+    transform: translateX(5px);
+  }
+
+  &.active {
+    background: var(--color-accent);
+    color: white;
+  }
+}
+
+.option-icon {
+  font-size: 1.25rem;
+}
+
+.option-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
