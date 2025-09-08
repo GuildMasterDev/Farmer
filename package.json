@@ -48,7 +48,7 @@
     "wait-on": "^7.2.0"
   },
   "build": {
-    "appId": "com.guildmasterdev.farmer",
+    "appId": "me.davidcanhelp.farmer",
     "productName": "Farmer",
     "copyright": "Copyright © 2024 GuildMaster Development",
     "directories": {
