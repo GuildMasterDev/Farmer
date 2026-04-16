@@ -1,8 +1,16 @@
 # Farmer
 A comprehensive resource hub for farming and agriculture
 
+**Live demo:** https://guildmasterdev.github.io/Farmer
+
 ## Overview
 Farmer is an Electron-based desktop application that provides farmers and agricultural professionals with quick access to essential farming resources, tools, and information. Built with Angular and TypeScript, it offers a modern, intuitive interface for navigating the agricultural world.
+
+## Web Demo
+The same Angular frontend is deployed to GitHub Pages at
+<https://guildmasterdev.github.io/Farmer>. Resource links open in a new
+browser tab when running on the web; the Electron desktop build routes them
+through `shell.openExternal` instead.
 
 ## Features
 - **Farm Management Tools** - Access to leading farm management software and platforms
@@ -17,8 +25,8 @@ Farmer is an Electron-based desktop application that provides farmers and agricu
 ## Getting Started
 
 ### Prerequisites
-- Node.js (v18 or higher)
-- npm (v9 or higher)
+- Node.js (v20 or higher)
+- npm (v10 or higher)
 
 ### Installation
 1. Clone the repository
@@ -40,9 +48,9 @@ npm run electron:dist
 ```
 
 ## Technology Stack
-- **Electron** - Desktop application framework
-- **Angular 17** - Frontend framework
-- **TypeScript** - Type-safe JavaScript
+- **Electron 41** - Desktop application framework
+- **Angular 19** - Frontend framework
+- **TypeScript 5.8** - Type-safe JavaScript
 - **SCSS** - Styling
 
 ## License

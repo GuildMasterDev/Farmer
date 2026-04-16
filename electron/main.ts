@@ -148,8 +148,8 @@ app.on('activate', () => {
 app.whenReady().then(() => {
   app.setAboutPanelOptions({
     applicationName: 'Farmer',
-    applicationVersion: '1.0.0',
-    copyright: 'Copyright © 2024 GuildMaster Development',
+    applicationVersion: '2.0.0',
+    copyright: 'Copyright © 2024-2026 GuildMaster Development',
     credits: 'A comprehensive resource hub for farming and agriculture.',
     website: 'https://www.guildmasterdev.com'
   });
