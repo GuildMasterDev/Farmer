@@ -23,28 +23,28 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^17.3.0",
-    "@angular/common": "^17.3.0",
-    "@angular/compiler": "^17.3.0",
-    "@angular/core": "^17.3.0",
-    "@angular/forms": "^17.3.0",
-    "@angular/platform-browser": "^17.3.0",
-    "@angular/platform-browser-dynamic": "^17.3.0",
-    "@angular/router": "^17.3.0",
+    "@angular/animations": "^19.2.21",
+    "@angular/common": "^19.2.21",
+    "@angular/compiler": "^19.2.21",
+    "@angular/core": "^19.2.21",
+    "@angular/forms": "^19.2.21",
+    "@angular/platform-browser": "^19.2.21",
+    "@angular/platform-browser-dynamic": "^19.2.21",
+    "@angular/router": "^19.2.21",
     "rxjs": "^7.8.1",
     "tslib": "^2.6.2",
-    "zone.js": "^0.14.4"
+    "zone.js": "^0.15.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.3.0",
-    "@angular/cli": "^17.3.0",
-    "@angular/compiler-cli": "^17.3.0",
+    "@angular-devkit/build-angular": "^19.2.24",
+    "@angular/cli": "^19.2.24",
+    "@angular/compiler-cli": "^19.2.21",
     "@types/node": "^20.11.30",
     "electron": "^29.1.0",
     "electron-builder": "^24.13.3",
     "electron-reload": "^2.0.0-alpha.1",
     "npm-run-all2": "^6.1.2",
-    "typescript": "^5.4.2",
+    "typescript": "^5.8.3",
     "wait-on": "^7.2.0"
   },
   "build": {
@@ -73,11 +73,17 @@
       "target": [
         {
           "target": "dmg",
-          "arch": ["x64", "arm64"]
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         },
         {
           "target": "zip",
-          "arch": ["x64", "arm64"]
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         }
       ]
     },
@@ -101,7 +107,10 @@
       "target": [
         {
           "target": "nsis",
-          "arch": ["x64", "ia32"]
+          "arch": [
+            "x64",
+            "ia32"
+          ]
         }
       ],
       "artifactName": "${productName}-Setup-${version}.${ext}"
@@ -118,7 +127,9 @@
       "target": [
         {
           "target": "AppImage",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ],
       "category": "Education",

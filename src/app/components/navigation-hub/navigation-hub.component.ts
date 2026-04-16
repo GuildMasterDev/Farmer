@@ -18,23 +18,22 @@ interface Resource {
 }
 
 @Component({
-  selector: 'app-navigation-hub',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './navigation-hub.component.html',
-  styleUrls: ['./navigation-hub.component.scss'],
-  animations: [
-    trigger('cardAnimation', [
-      transition('* => *', [
-        query(':enter', [
-          style({ opacity: 0, transform: 'translateY(20px)' }),
-          stagger(100, [
-            animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
-          ])
-        ], { optional: true })
-      ])
-    ])
-  ]
+    selector: 'app-navigation-hub',
+    imports: [CommonModule],
+    templateUrl: './navigation-hub.component.html',
+    styleUrls: ['./navigation-hub.component.scss'],
+    animations: [
+        trigger('cardAnimation', [
+            transition('* => *', [
+                query(':enter', [
+                    style({ opacity: 0, transform: 'translateY(20px)' }),
+                    stagger(100, [
+                        animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+                    ])
+                ], { optional: true })
+            ])
+        ])
+    ]
 })
 export class NavigationHubComponent {
   categories: ResourceCategory[] = [

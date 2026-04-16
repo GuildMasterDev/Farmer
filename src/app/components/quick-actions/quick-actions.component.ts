@@ -9,11 +9,10 @@ interface QuickAction {
 }
 
 @Component({
-  selector: 'app-quick-actions',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './quick-actions.component.html',
-  styleUrls: ['./quick-actions.component.scss']
+    selector: 'app-quick-actions',
+    imports: [CommonModule],
+    templateUrl: './quick-actions.component.html',
+    styleUrls: ['./quick-actions.component.scss']
 })
 export class QuickActionsComponent {
   isExpanded = false;

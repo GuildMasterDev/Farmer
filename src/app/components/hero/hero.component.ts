@@ -3,20 +3,19 @@ import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
-  selector: 'app-hero',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './hero.component.html',
-  styleUrls: ['./hero.component.scss'],
-  animations: [
-    trigger('fadeInUp', [
-      state('in', style({ opacity: 1, transform: 'translateY(0)' })),
-      transition('void => *', [
-        style({ opacity: 0, transform: 'translateY(30px)' }),
-        animate('800ms ease-out')
-      ])
-    ])
-  ]
+    selector: 'app-hero',
+    imports: [CommonModule],
+    templateUrl: './hero.component.html',
+    styleUrls: ['./hero.component.scss'],
+    animations: [
+        trigger('fadeInUp', [
+            state('in', style({ opacity: 1, transform: 'translateY(0)' })),
+            transition('void => *', [
+                style({ opacity: 0, transform: 'translateY(30px)' }),
+                animate('800ms ease-out')
+            ])
+        ])
+    ]
 })
 export class HeroComponent implements OnInit {
   subtitle = 'Your Agricultural Resource Hub';

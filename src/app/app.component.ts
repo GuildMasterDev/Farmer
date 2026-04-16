@@ -7,18 +7,17 @@ import { QuickActionsComponent } from './components/quick-actions/quick-actions.
 import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switcher.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    HeroComponent,
-    NavigationHubComponent,
-    QuickActionsComponent,
-    ThemeSwitcherComponent
-  ],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    imports: [
+        CommonModule,
+        RouterOutlet,
+        HeroComponent,
+        NavigationHubComponent,
+        QuickActionsComponent,
+        ThemeSwitcherComponent
+    ],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   title = 'Artist';

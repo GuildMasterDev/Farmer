@@ -8,11 +8,10 @@ interface Theme {
 }
 
 @Component({
-  selector: 'app-theme-switcher',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './theme-switcher.component.html',
-  styleUrls: ['./theme-switcher.component.scss']
+    selector: 'app-theme-switcher',
+    imports: [CommonModule],
+    templateUrl: './theme-switcher.component.html',
+    styleUrls: ['./theme-switcher.component.scss']
 })
 export class ThemeSwitcherComponent implements OnInit {
   currentTheme = 'light';
